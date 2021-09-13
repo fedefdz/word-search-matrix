@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using System;
 
 namespace WordSearch.Benchmark
 {
@@ -11,7 +10,11 @@ namespace WordSearch.Benchmark
             //var summary1 = BenchmarkRunner.Run<WordFinderBenchmarks>();
             //var summary2 = BenchmarkRunner.Run<NameParserBenchmarks>();
 
-            BenchmarkRunner.Run<StringCountOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<MatrixCountHorizontalOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<MatrixCountVerticalOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<WordFinderBenchmarks>();
+            BenchmarkRunner.Run<WordFinderRankingBenchmarks>();
         }
     }
 }

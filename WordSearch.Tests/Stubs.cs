@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WordSearch.Tests
+﻿namespace WordSearch.Tests
 {
     public class Stubs
     {
@@ -22,13 +16,13 @@ namespace WordSearch.Tests
             "abcdcchill",
             "fgwiofgwio",
             "chillchill",
-            "pqnsdpqnsd",
-            "uvdxyucold",
-            "xyxyxyxyxy",
-            "xyxyxyxyxy",
-            "xyxyxyxyxy",
-            "xyxyxyxyxy",
-            "xyxyxyxyxy"
+            "pqnslpqnsd",
+            "uvdxlucold",
+            "xyxyiyxyxy",
+            "xllihcydyx",
+            "xyxycyxlxy",
+            "xyxoxyxoxy",
+            "xyxcxyxcxy"
         };
     }
 }

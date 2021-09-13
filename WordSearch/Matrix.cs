@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WordSearch
 {
@@ -22,20 +20,59 @@ namespace WordSearch
 
         public int Columns => _matrix.GetLength(ColumnDimension);
 
-        public string RowAsString(int row)
-        {
-            if (row < 0 || row >= Rows)
-                throw new MatrixException("row index out of range.");
+        public int N => Rows;
 
-            return _matrix.RowAsString(row);
+        public string RowAsString(int row) => row >= 0 && row < Rows ? _matrix.RowAsString(row)
+            : throw new MatrixException("row index out of range.");
+
+        public string ColumnAsString(int col) => col >= 0 && col < Columns ? _matrix.ColumnAsString(col)
+            : throw new MatrixException("column index out of range.");
+
+        public int CountHorizontalOcurrences(string word)
+        {
+            var ocurrences = 0;
+            for (int row = 0; row < Rows; row++)
+            {
+                var sentence = _matrix.RowAsString(row);
+                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
+            }
+
+            return ocurrences;
         }
 
-        public string ColumnAsString(int col)
+        public int CountVerticalOcurrences(string word)
         {
-            if (col < 0 || col >= Columns)
-                throw new MatrixException("column index out of range.");
+            var ocurrences = 0;
+            for (int col = 0; col < Columns; col++)
+            {
+                var sentence = _matrix.ColumnAsString(col);
+                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
+            }
 
-            return _matrix.ColumnAsString(col);
+            return ocurrences;
+        }
+
+        public int CountHorizontalOcurrencesSpan(ReadOnlySpan<char> word)
+        {
+            var ocurrences = 0;
+            for (int row = 0; row < Rows; row++)
+            {
+                var sentence = _matrix.RowAsString(row);
+                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
+            }
+            return ocurrences;
+        }
+
+        public int CountVerticalOcurrencesSpan(ReadOnlySpan<char> word)
+        {
+            var ocurrences = 0;
+            for (int col = 0; col < Columns; col++)
+            {
+                var sentence = _matrix.ColumnAsString(col);
+                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
+            }
+
+            return ocurrences;
         }
 
         private static char[,] GenerateMatrix(IEnumerable<string> matrixsource)
@@ -49,9 +86,8 @@ namespace WordSearch
             foreach (var word in matrixsource)
             {
                 for (int i = 0; i < word.Length; i++)
-                {
                     matrix[row, i] = word[i];
-                }
+
                 row++;
             }
 
@@ -70,13 +106,6 @@ namespace WordSearch
                 throw new MatrixException("matrix must contain words of equal lengths.");
             if (matrix.Count() != size)
                 throw new MatrixException("matrix is not NxN.");
-        }
-    }
-
-    public class MatrixException : Exception
-    {
-        public MatrixException(string message) : base(message)
-        {
         }
     }
 }

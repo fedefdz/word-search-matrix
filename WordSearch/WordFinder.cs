@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace WordSearch
 {
-    public interface IWonderFinder
+    public interface IWordFinder
     {
         IEnumerable<string> Find(IEnumerable<string> wordstream);
     }
 
-    public class WordFinder : IWonderFinder
+    public class WordFinder : IWordFinder
     {
         private Matrix _matrix;
 
@@ -20,36 +18,10 @@ namespace WordSearch
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
-            var results = new Dictionary<string, int>();
-            foreach (var word in wordstream)
-            {
-                results.TryAdd(word, 0);
-            }
+            var smartsearch = SmartMatrixCounterStrategy.SelectBestFor(_matrix, wordstream);
+            var ranking = smartsearch.Rank(_matrix, wordstream);
 
-            foreach (var key in results.Keys)
-            {
-                // horizontal
-                for (int row = 0; row < _matrix.Rows; row++)
-                {
-                    var sentence = _matrix.RowAsString(row);
-                    var ocurrences = StringUtils.CountOcurrencesWord(sentence, key);
-
-                    results[key] += ocurrences;
-                }
-
-                // vertical
-                for (int col = 0; col < _matrix.Columns; col++)
-                {
-                    var sentence = _matrix.ColumnAsString(col);
-                    var ocurrences = StringUtils.CountOcurrencesWord(sentence, key);
-
-                    results[key] += ocurrences;
-                }
-            }
-
-            return results.OrderByDescending(x => x.Value)
-                .Where(x => x.Value > 0)
-                .Take(10).Select(x => x.Key);
+            return ranking.Top(10);
         }
     }
 }

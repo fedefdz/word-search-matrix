@@ -1,29 +1,42 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WordSearch.Benchmark
 {
-    //[MemoryDiagnoser]
+    [MemoryDiagnoser]
     public class WordFinderBenchmarks
     {
-        public static readonly string[] MatrixSample = {
-            "abcdc",
-            "fgwio",
-            "chill",
-            "pqnsd",
-            "uvdxy"
-        };
+        [Params(8, 16, 64)]
+        public int SizeMatrix;
 
-        private static readonly IWonderFinder Finder = new WordFinder(MatrixSample);
+        private IWordFinder _finder;
 
-        [Benchmark(Baseline = true)]
+        [GlobalSetup]
+        public void GlobalSetup()
+        {
+            var pattern = Utils.PatternMatrix;
+            var repeat = SizeMatrix / pattern.Length;
+
+            var matrixsource = Utils.RepeatMatrixBuilderAppend(pattern, repeat);
+
+            _finder = new WordFinder(matrixsource);
+        }
+
+        [Benchmark]
         public void FinderSingle()
         {
-            Finder.Find(new[] { "chill " });
+            _finder.Find(new[] { "chill" });
+        }
+
+        [Benchmark]
+        public void FinderFive()
+        {
+            _finder.Find(new[] { "chil", "wind", "eplmdepl", "pqnsumme", "fgwiopqr" });
+        }
+
+        [Benchmark]
+        public void FinderTen()
+        {
+            _finder.Find(new[] { "chil", "wind", "eplmdepl", "pqnsumme", "fgwiopqr", "rqpoiwgf", "rqpo", "summ", "mmus", "puafc" });
         }
     }
 }
