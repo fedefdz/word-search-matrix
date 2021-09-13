@@ -19,7 +19,7 @@
             var sentence = new char[rows];
             for (int i = 0; i < rows; i++)
             {
-                sentence[i] = matrix[col, i];
+                sentence[i] = matrix[i, col];
             }
             return new string(sentence);
         }

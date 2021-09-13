@@ -7,21 +7,12 @@ namespace WordSearch.Tests
 {
     public class WordFinderTest
     {
-        public static readonly string[] MatrixSample =
-        {
-            "abcdc",
-            "fgwio",
-            "chill",
-            "pqnsd",
-            "uvdxy"
-        };
-
         public static readonly string[] MatrixEmpty = { };
 
         [Fact]
         public void WordFinder_Constructor_Must_Initialize_From_An_NxN_Matrix()
         {
-            var sut = new WordFinder(MatrixSample);
+            var sut = new WordFinder(Stubs.MatrixSample);
 
             Assert.NotNull(sut);
         }
@@ -33,7 +24,7 @@ namespace WordSearch.Tests
 
             Action actual = () => new WordFinder(matrixsource);
 
-            Assert.Throws<ArgumentException>(actual);
+            Assert.Throws<MatrixException>(actual);
         }
 
         [Fact]
@@ -46,27 +37,29 @@ namespace WordSearch.Tests
                 "cold", "wind"
             };
 
-            var sut = new WordFinder(MatrixSample);
+            // sut not contains 'snow' word
+            var sut = new WordFinder(Stubs.MatrixSample);
             var result = sut.Find(wordstream);
 
-            Assert.Equal(4, result.Count());
+            Assert.Equal(3, result.Count());
         }
 
         [Fact]
         public void WordFinder_Find_Show_Result()
         {
-            var wordstream = new[]
-            {
-                "cold", "wind", "snow", "chill",
-                "cold", "wind", "snow", "chill",
-                "cold", "wind"
-            };
+            var wordstream = new[] { "cold", "wind", "snow", "chill" };
 
-            var sut = new WordFinder(MatrixSample);
+            // MatrixBig contains this rank
+            // chill -> 3
+            // cold -> 2
+            // wind -> 1
+            var sut = new WordFinder(Stubs.MatrixBig);
             var result = sut.Find(wordstream);
 
             Assert.Collection(result,
-                item => Assert.Equal("chill", item));
+                item => Assert.Equal("chill", item),
+                item => Assert.Equal("cold", item),
+                item => Assert.Equal("wind", item));
         }
     }
 }

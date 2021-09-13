@@ -11,32 +11,11 @@ namespace WordSearch
 
     public class WordFinder : IWonderFinder
     {
-        private char[,] _matrix;
+        private Matrix _matrix;
 
         public WordFinder(IEnumerable<string> matrix)
         {
-            if (matrix is null || !matrix.Any())
-                throw new ArgumentException("matrix is empty.");
-            if (matrix.Any(word => string.IsNullOrEmpty(word)))
-                throw new ArgumentException("matrix must not contain empty words.");
-
-            var size = matrix.First().Length;
-            if (matrix.Any(word => word.Length != size))
-                throw new ArgumentException("matrix must contain words of equal lengths.");
-            if (matrix.Count() != size)
-                throw new ArgumentException("matrix is not NxN.");
-
-            _matrix = new char[size, size];
-
-            var row = 0;
-            foreach (var word in matrix)
-            {
-                for (int i = 0; i < word.Length; i++)
-                {
-                    _matrix[row, i] = word[i];
-                }
-                row++;
-            }
+            _matrix = new Matrix(matrix);
         }
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
@@ -50,8 +29,7 @@ namespace WordSearch
             foreach (var key in results.Keys)
             {
                 // horizontal
-                var rows = _matrix.GetLength(1);
-                for (int row = 0; row < rows; row++)
+                for (int row = 0; row < _matrix.Rows; row++)
                 {
                     var sentence = _matrix.RowAsString(row);
                     var ocurrences = StringUtils.CountOcurrencesWord(sentence, key);
@@ -60,8 +38,7 @@ namespace WordSearch
                 }
 
                 // vertical
-                var cols = _matrix.GetLength(0);
-                for (int col = 0; col < cols; col++)
+                for (int col = 0; col < _matrix.Columns; col++)
                 {
                     var sentence = _matrix.ColumnAsString(col);
                     var ocurrences = StringUtils.CountOcurrencesWord(sentence, key);
