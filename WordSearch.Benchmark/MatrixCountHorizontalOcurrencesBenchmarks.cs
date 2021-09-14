@@ -8,7 +8,8 @@ namespace WordSearch.Benchmark
         [Params(8, 16, 64)]
         public int SizeMatrix;
 
-        private Matrix _matrix = null;
+        private Matrix _matrixBasic = null;
+        private MatrixFlyweight _matrixFlyweight = null;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -18,26 +19,43 @@ namespace WordSearch.Benchmark
 
             var matrixsource = Utils.RepeatMatrixBuilderAppend(pattern, repeat);
 
-            _matrix = new Matrix(matrixsource);
+            _matrixBasic = new Matrix(matrixsource);
+            _matrixFlyweight = new MatrixFlyweight(matrixsource);
         }
 
         [GlobalCleanup]
-        public void GlobalCleanup() => _matrix = null;
+        public void GlobalCleanup() => _matrixBasic = null;
 
         [Benchmark]
         [Arguments("chil")]
         [Arguments("pqnsumme")]
-        public void CountHorizontalOucrrencesWord(string word)
+        public void MatrixBasicCountHorizontalOucrrencesWord(string word)
         {
-            _matrix.CountHorizontalOcurrences(word);
+            _matrixBasic.CountHorizontalOcurrences(word);
         }
 
         [Benchmark]
         [Arguments("chil")]
         [Arguments("pqnsumme")]
-        public void CountHorizontalOucrrencesWordSpan(string word)
+        public void MatrixBasicCountHorizontalOucrrencesWordSpan(string word)
         {
-            _matrix.CountHorizontalOcurrencesSpan(word);
+            _matrixBasic.CountHorizontalOcurrencesSpan(word);
+        }
+
+        [Benchmark]
+        [Arguments("chil")]
+        [Arguments("pqnsumme")]
+        public void MatrixFlyweightCountHorizontalOucrrencesWord(string word)
+        {
+            _matrixFlyweight.CountHorizontalOcurrences(word);
+        }
+
+        [Benchmark]
+        [Arguments("chil")]
+        [Arguments("pqnsumme")]
+        public void MatrixFlyweightCountHorizontalOucrrencesWordSpan(string word)
+        {
+            _matrixFlyweight.CountHorizontalOcurrencesSpan(word);
         }
     }
 }

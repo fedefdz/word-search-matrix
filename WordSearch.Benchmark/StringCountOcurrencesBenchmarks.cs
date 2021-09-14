@@ -5,7 +5,7 @@ namespace WordSearch.Benchmark
     [MemoryDiagnoser]
     public class StringCountOcurrencesBenchmarks
     {
-        [Params(8, 16, 32, 64)]
+        [Params(8, 16, 64)]
         public int N;
 
         private string _source = string.Empty;

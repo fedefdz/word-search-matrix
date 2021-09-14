@@ -3,12 +3,24 @@ using Xunit;
 
 namespace WordSearch.Tests
 {
-    public class MatrixTest
+    public class MatrixBasicTest : MatrixGenericTest<Matrix>
     {
+        public override Matrix GenerateMatrix(string[] source) => new Matrix(source);
+    }
+
+    public class MatrixFlyweightTest : MatrixGenericTest<MatrixFlyweight>
+    {
+        public override MatrixFlyweight GenerateMatrix(string[] source) => new MatrixFlyweight(source);
+    }
+
+    public abstract class MatrixGenericTest<T> where T : Matrix
+    {
+        public abstract T GenerateMatrix(string[] source);
+
         [Fact]
         public void Matrix_RowAsString_Return_All_Chars_Of_Index_Row_As_String()
         {
-            var matrix = new Matrix(Stubs.MatrixSample);
+            T matrix = GenerateMatrix(Stubs.MatrixSample);
 
             var actual = matrix.RowAsString(2);
 
@@ -21,7 +33,7 @@ namespace WordSearch.Tests
         [InlineData(5)]
         public void Matrix_RowAsString_When_Index_Out_Of_Range_ThrowException(int index)
         {
-            var matrix = new Matrix(Stubs.MatrixSample);
+            T matrix = GenerateMatrix(Stubs.MatrixSample);
 
             Action actual = () => matrix.RowAsString(index);
 
@@ -32,7 +44,7 @@ namespace WordSearch.Tests
         [Fact]
         public void Matrix_ColumnAsString_Return_All_Chars_Of_Index_Column_As_String()
         {
-            var matrix = new Matrix(Stubs.MatrixSample);
+            T matrix = GenerateMatrix(Stubs.MatrixSample);
 
             var actual = matrix.ColumnAsString(2);
 
@@ -45,7 +57,7 @@ namespace WordSearch.Tests
         [InlineData(5)]
         public void Matrix_ColumnAsString_When_Index_Out_Of_Range_ThrowException(int index)
         {
-            var matrix = new Matrix(Stubs.MatrixSample);
+            T matrix = GenerateMatrix(Stubs.MatrixSample);
 
             Action actual = () => matrix.ColumnAsString(index);
 
@@ -60,7 +72,7 @@ namespace WordSearch.Tests
         [InlineData("snow", 0)]
         public void Matrix_CountOcurrences_Return_Number_Of_Ocurrences_Horizontal_Of_A_Word(string word, int ocurrencesExpected)
         {
-            var sut = new Matrix(Stubs.MatrixBig);
+            T sut = GenerateMatrix(Stubs.MatrixBig);
 
             var actual = sut.CountHorizontalOcurrences(word);
 
@@ -76,7 +88,7 @@ namespace WordSearch.Tests
         [InlineData("snow", 0)]
         public void Matrix_CountOcurrences_Return_Number_Of_Ocurrences_Vertical_Of_A_Word(string word, int ocurrencesExpected)
         {
-            var sut = new Matrix(Stubs.MatrixBig);
+            T sut = GenerateMatrix(Stubs.MatrixBig);
 
             var actual = sut.CountVerticalOcurrences(word);
 
@@ -90,7 +102,7 @@ namespace WordSearch.Tests
         [InlineData("snow", 0)]
         public void Matrix_CountOcurrencesSpan_Return_Number_Of_Ocurrences_Horizontal_Of_A_Word(string word, int ocurrencesExpected)
         {
-            var sut = new Matrix(Stubs.MatrixBig);
+            T sut = GenerateMatrix(Stubs.MatrixBig);
 
             var actual = sut.CountHorizontalOcurrencesSpan(word);
 
@@ -106,7 +118,7 @@ namespace WordSearch.Tests
         [InlineData("snow", 0)]
         public void Matrix_CountOcurrencesSpan_Return_Number_Of_Ocurrences_Vertical_Of_A_Word(string word, int ocurrencesExpected)
         {
-            var sut = new Matrix(Stubs.MatrixBig);
+            T sut = GenerateMatrix(Stubs.MatrixBig);
 
             var actual = sut.CountVerticalOcurrencesSpan(word);
 

@@ -9,7 +9,7 @@ namespace WordSearch
         public const int RowDimension = 1;
         public const int ColumnDimension = 0;
 
-        private readonly char[,] _matrix;
+        protected readonly char[,] _matrix;
 
         public Matrix(IEnumerable<string> matrix)
         {
@@ -28,7 +28,7 @@ namespace WordSearch
         public string ColumnAsString(int col) => col >= 0 && col < Columns ? _matrix.ColumnAsString(col)
             : throw new MatrixException("column index out of range.");
 
-        public int CountHorizontalOcurrences(string word)
+        public virtual int CountHorizontalOcurrences(string word)
         {
             var ocurrences = 0;
             for (int row = 0; row < Rows; row++)
@@ -40,7 +40,7 @@ namespace WordSearch
             return ocurrences;
         }
 
-        public int CountVerticalOcurrences(string word)
+        public virtual int CountVerticalOcurrences(string word)
         {
             var ocurrences = 0;
             for (int col = 0; col < Columns; col++)
@@ -52,7 +52,7 @@ namespace WordSearch
             return ocurrences;
         }
 
-        public int CountHorizontalOcurrencesSpan(ReadOnlySpan<char> word)
+        public virtual int CountHorizontalOcurrencesSpan(ReadOnlySpan<char> word)
         {
             var ocurrences = 0;
             for (int row = 0; row < Rows; row++)
@@ -63,7 +63,7 @@ namespace WordSearch
             return ocurrences;
         }
 
-        public int CountVerticalOcurrencesSpan(ReadOnlySpan<char> word)
+        public virtual int CountVerticalOcurrencesSpan(ReadOnlySpan<char> word)
         {
             var ocurrences = 0;
             for (int col = 0; col < Columns; col++)

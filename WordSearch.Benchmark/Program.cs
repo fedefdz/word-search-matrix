@@ -14,7 +14,8 @@ namespace WordSearch.Benchmark
             //BenchmarkRunner.Run<MatrixCountHorizontalOcurrencesBenchmarks>();
             //BenchmarkRunner.Run<MatrixCountVerticalOcurrencesBenchmarks>();
             //BenchmarkRunner.Run<WordFinderBenchmarks>();
-            BenchmarkRunner.Run<WordFinderRankingBenchmarks>();
+            //BenchmarkRunner.Run<WordFinderRankingBenchmarks>();
+            BenchmarkRunner.Run<WordFinderLongestStreamRankingBenchmarks>();
         }
     }
 }

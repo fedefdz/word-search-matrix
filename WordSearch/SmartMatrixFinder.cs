@@ -22,7 +22,11 @@ namespace WordSearch
         };
     }
 
-    public class SmartMatrixCounterBasic : ISmartMatrixCounter
+    public class SmartMatrixCounterBasic : SmartMatrixGenericCounterBasic<Matrix> { }
+
+    public class SmartMatrixFlyweightCounterBasic : SmartMatrixGenericCounterBasic<MatrixFlyweight> { }
+
+    public abstract class SmartMatrixGenericCounterBasic<T> : ISmartMatrixCounter where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
@@ -41,7 +45,11 @@ namespace WordSearch
         }
     }
 
-    public class SmartMatrixCounterSpan : ISmartMatrixCounter
+    public class SmartMatrixCounterSpan : SmartMatrixGenericCounterSpan<Matrix> { }
+
+    public class SmartMatrixFlyweightCounterSpan : SmartMatrixGenericCounterSpan<MatrixFlyweight> { }
+
+    public abstract class SmartMatrixGenericCounterSpan<T> : ISmartMatrixCounter where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
@@ -60,7 +68,11 @@ namespace WordSearch
         }
     }
 
-    public class SmartMatrixCounterParallel : ISmartMatrixCounter
+    public class SmartMatrixCounterParallel : SmartMatrixGenericCounterParallel<Matrix> { }
+
+    public class SmartMatrixFlyweightCounterParallel : SmartMatrixGenericCounterParallel<MatrixFlyweight> { }
+
+    public abstract class SmartMatrixGenericCounterParallel<T> : ISmartMatrixCounter where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
@@ -83,7 +95,11 @@ namespace WordSearch
         }
     }
 
-    public class SmartMatrixCounterSpanParallel : ISmartMatrixCounter
+    public class SmartMatrixCounterSpanParallel : SmartMatrixGenericCounterSpanParallel<Matrix> { }
+
+    public class SmartMatrixFlyweightCounterSpanParallel : SmartMatrixGenericCounterSpanParallel<MatrixFlyweight> { }
+
+    public abstract class SmartMatrixGenericCounterSpanParallel<T> : ISmartMatrixCounter where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
