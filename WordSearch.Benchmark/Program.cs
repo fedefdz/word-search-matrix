@@ -11,11 +11,21 @@ namespace WordSearch.Benchmark
             //var summary2 = BenchmarkRunner.Run<NameParserBenchmarks>();
 
             //BenchmarkRunner.Run<StringCountOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesSpanBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesBetweenSpanBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesSpanCompareBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesSpanStepingBenchmarks>();
+            //BenchmarkRunner.Run<StringCountOcurrencesSpanLoopBenchmarks>();
+
             //BenchmarkRunner.Run<MatrixCountHorizontalOcurrencesBenchmarks>();
-            //BenchmarkRunner.Run<MatrixCountVerticalOcurrencesBenchmarks>();
+            //BenchmarkRunner.Run<MatrixCountHorizontalOcurrencesNotLoopBenchmarks>();
+
+            BenchmarkRunner.Run<MatrixCountVerticalOcurrencesBenchmarks>();
+            BenchmarkRunner.Run<MatrixCountVerticalOcurrencesNotLoopBenchmarks>();
+
             //BenchmarkRunner.Run<WordFinderBenchmarks>();
             //BenchmarkRunner.Run<WordFinderRankingBenchmarks>();
-            BenchmarkRunner.Run<WordFinderLongestStreamRankingBenchmarks>();
+            //BenchmarkRunner.Run<WordFinderLongestStreamRankingBenchmarks>();
         }
     }
 }

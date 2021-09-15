@@ -28,48 +28,25 @@ namespace WordSearch
         public string ColumnAsString(int col) => col >= 0 && col < Columns ? _matrix.ColumnAsString(col)
             : throw new MatrixException("column index out of range.");
 
-        public virtual int CountHorizontalOcurrences(string word)
+        public virtual int CountHorizontalOcurrences(ReadOnlySpan<char> word)
         {
             var ocurrences = 0;
             for (int row = 0; row < Rows; row++)
             {
                 var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
             }
 
             return ocurrences;
         }
 
-        public virtual int CountVerticalOcurrences(string word)
+        public virtual int CountVerticalOcurrences(ReadOnlySpan<char> word)
         {
             var ocurrences = 0;
             for (int col = 0; col < Columns; col++)
             {
                 var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
-            }
-
-            return ocurrences;
-        }
-
-        public virtual int CountHorizontalOcurrencesSpan(ReadOnlySpan<char> word)
-        {
-            var ocurrences = 0;
-            for (int row = 0; row < Rows; row++)
-            {
-                var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
-            }
-            return ocurrences;
-        }
-
-        public virtual int CountVerticalOcurrencesSpan(ReadOnlySpan<char> word)
-        {
-            var ocurrences = 0;
-            for (int col = 0; col < Columns; col++)
-            {
-                var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
             }
 
             return ocurrences;

@@ -15,7 +15,7 @@ namespace WordSearch
             _flyweight = GenerateFlyweight();
         }
 
-        public override int CountHorizontalOcurrences(string word)
+        public override int CountHorizontalOcurrences(ReadOnlySpan<char> word)
         {
             if (!_flyweight.ContainsKey(word[0]))
                 return 0;
@@ -24,26 +24,12 @@ namespace WordSearch
             foreach (int row in _flyweight[word[0]].Rows)
             {
                 var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
             }
             return ocurrences;
         }
 
-        public override int CountHorizontalOcurrencesSpan(ReadOnlySpan<char> word)
-        {
-            if (!_flyweight.ContainsKey(word[0]))
-                return 0;
-
-            var ocurrences = 0;
-            foreach (int row in _flyweight[word[0]].Rows)
-            {
-                var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
-            }
-            return ocurrences;
-        }
-
-        public override int CountVerticalOcurrences(string word)
+        public override int CountVerticalOcurrences(ReadOnlySpan<char> word)
         {
             if (!_flyweight.ContainsKey(word[0]))
                 return 0;
@@ -53,23 +39,9 @@ namespace WordSearch
             foreach (int col in _flyweight[word[0]].Cols)
             {
                 var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesWord(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
             }
 
-            return ocurrences;
-        }
-
-        public override int CountVerticalOcurrencesSpan(ReadOnlySpan<char> word)
-        {
-            if (!_flyweight.ContainsKey(word[0]))
-                return 0;
-
-            var ocurrences = 0;
-            foreach (int col in _flyweight[word[0]].Cols)
-            {
-                var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesWordSpanOptimist(sentence, word);
-            }
             return ocurrences;
         }
 

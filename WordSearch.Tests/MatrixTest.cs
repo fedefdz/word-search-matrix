@@ -94,35 +94,5 @@ namespace WordSearch.Tests
 
             Assert.Equal(ocurrencesExpected, actual);
         }
-
-        [Theory]
-        [InlineData("chill", 3)]
-        [InlineData("cold", 1)]
-        [InlineData("wind", 0)]
-        [InlineData("snow", 0)]
-        public void Matrix_CountOcurrencesSpan_Return_Number_Of_Ocurrences_Horizontal_Of_A_Word(string word, int ocurrencesExpected)
-        {
-            T sut = GenerateMatrix(Stubs.MatrixBig);
-
-            var actual = sut.CountHorizontalOcurrencesSpan(word);
-
-            Assert.Equal(ocurrencesExpected, actual);
-        }
-
-        [Theory]
-        [InlineData("chill", 0)]
-        [InlineData("cold", 0)]
-        [InlineData("llihc", 1)]
-        [InlineData("dloc", 1)]
-        [InlineData("wind", 1)]
-        [InlineData("snow", 0)]
-        public void Matrix_CountOcurrencesSpan_Return_Number_Of_Ocurrences_Vertical_Of_A_Word(string word, int ocurrencesExpected)
-        {
-            T sut = GenerateMatrix(Stubs.MatrixBig);
-
-            var actual = sut.CountVerticalOcurrencesSpan(word);
-
-            Assert.Equal(ocurrencesExpected, actual);
-        }
     }
 }

@@ -5,7 +5,7 @@ namespace WordSearch
 {
     public static class StringUtils
     {
-        public static int CountOcurrencesWord(string source, string word)
+        public static int CountOcurrences(string source, string word)
         {
             var substring = source.Replace(word, string.Empty);
             if (source.Length == substring.Length)
@@ -14,7 +14,7 @@ namespace WordSearch
             return (source.Length - substring.Length) / word.Length;
         }
 
-        public static int CountOcurrencesWordSpan(ReadOnlySpan<char> source, ReadOnlySpan<char> word)
+        public static int CountOcurrencesSpan(ReadOnlySpan<char> source, ReadOnlySpan<char> word)
         {
             var count = 0;
             var index = source.IndexOf(word);
@@ -26,12 +26,30 @@ namespace WordSearch
             if (next >= source.Length)
                 return count;
 
-            var slice = source.Slice(next, source.Length - next);
-            count += CountOcurrencesWordSpan(slice, word);
+            var slice = source[next..];
+            count += CountOcurrencesSpan(slice, word);
             return count;
         }
 
-        public static int CountOcurrencesWordSpanOptimist(ReadOnlySpan<char> source, ReadOnlySpan<char> word)
+        public static int CountOcurrencesSpanLoop(ReadOnlySpan<char> source, ReadOnlySpan<char> word)
+        {
+            var count = 0;
+            var next = 0;
+            var index = source.IndexOf(word);
+            while (index >= 0)
+            {
+                count++;
+                next += index + word.Length;
+                if (source.Length == next)
+                    return count;
+
+                var slice = source[next..];
+                index = slice.IndexOf(word);
+            }
+            return count;
+        }
+
+        public static int CountOcurrencesSpanOptimist(ReadOnlySpan<char> source, ReadOnlySpan<char> word)
         {
             var count = 0;
             try
@@ -42,8 +60,8 @@ namespace WordSearch
 
                 count++;
                 var next = index + word.Length;
-                var slice = source.Slice(next, source.Length - next);
-                count += CountOcurrencesWordSpan(slice, word);
+                var slice = source[next..];
+                count += CountOcurrencesSpanOptimist(slice, word);
                 return count;
             }
             catch (ArgumentOutOfRangeException)

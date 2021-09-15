@@ -12,14 +12,10 @@ namespace WordSearch.Benchmark
         private Matrix _matrix;
 
         private SmartMatrixCounterBasic _smartMatrixCounterBasic;
-        private SmartMatrixCounterSpan _smartMatrixCounterSpan;
         private SmartMatrixCounterParallel _smartMatrixCounterParallel;
-        private SmartMatrixCounterSpanParallel _smartMatrixCounterSpanParallel;
 
         private SmartMatrixFlyweightCounterBasic _smartMatrixFlyweightCounterBasic;
-        private SmartMatrixFlyweightCounterSpan _smartMatrixFlyweightCounterSpan;
         private SmartMatrixFlyweightCounterParallel _smartMatrixFlyweightCounterParallel;
-        private SmartMatrixFlyweightCounterSpanParallel _smartMatrixFlyweightCounterSpanParallel;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -32,14 +28,10 @@ namespace WordSearch.Benchmark
             _matrix = new Matrix(matrixsource);
 
             _smartMatrixCounterBasic = new SmartMatrixCounterBasic();
-            _smartMatrixCounterSpan = new SmartMatrixCounterSpan();
             _smartMatrixCounterParallel = new SmartMatrixCounterParallel();
-            _smartMatrixCounterSpanParallel = new SmartMatrixCounterSpanParallel();
 
             _smartMatrixFlyweightCounterBasic = new SmartMatrixFlyweightCounterBasic();
-            _smartMatrixFlyweightCounterSpan = new SmartMatrixFlyweightCounterSpan();
             _smartMatrixFlyweightCounterParallel = new SmartMatrixFlyweightCounterParallel();
-            _smartMatrixFlyweightCounterSpanParallel = new SmartMatrixFlyweightCounterSpanParallel();
         }
 
         [GlobalCleanup]
@@ -48,14 +40,10 @@ namespace WordSearch.Benchmark
             _matrix = null;
 
             _smartMatrixCounterBasic = null;
-            _smartMatrixCounterSpan = null;
             _smartMatrixCounterParallel = null;
-            _smartMatrixCounterSpanParallel = null;
 
             _smartMatrixFlyweightCounterBasic = null;
-            _smartMatrixFlyweightCounterSpan = null;
             _smartMatrixFlyweightCounterParallel = null;
-            _smartMatrixFlyweightCounterSpanParallel = null;
         }
 
         public IEnumerable<string[]> WordstreamData()
@@ -71,15 +59,7 @@ namespace WordSearch.Benchmark
 
         [Benchmark]
         [ArgumentsSource(nameof(WordstreamData))]
-        public void SmartMatricCounterSpan(string[] wordstream) => _smartMatrixCounterSpan.Rank(_matrix, wordstream);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(WordstreamData))]
         public void SmartMatricCounterParallel(string[] wordstream) => _smartMatrixCounterParallel.Rank(_matrix, wordstream);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(WordstreamData))]
-        public void SmartMatricCounterSpanParallel(string[] wordstream) => _smartMatrixCounterSpanParallel.Rank(_matrix, wordstream);
 
         [Benchmark]
         [ArgumentsSource(nameof(WordstreamData))]
@@ -87,15 +67,7 @@ namespace WordSearch.Benchmark
 
         [Benchmark]
         [ArgumentsSource(nameof(WordstreamData))]
-        public void SmartMatricFlyweightCounterSpan(string[] wordstream) => _smartMatrixFlyweightCounterSpan.Rank(_matrix, wordstream);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(WordstreamData))]
         public void SmartMatricFlyweightCounterParallel(string[] wordstream) => _smartMatrixFlyweightCounterParallel.Rank(_matrix, wordstream);
-
-        [Benchmark]
-        [ArgumentsSource(nameof(WordstreamData))]
-        public void SmartMatricFlyweightCounterSpanParallel(string[] wordstream) => _smartMatrixFlyweightCounterSpanParallel.Rank(_matrix, wordstream);
     }
 
     [MemoryDiagnoser]
@@ -106,11 +78,11 @@ namespace WordSearch.Benchmark
 
         private Matrix _matrix;
 
-        private SmartMatrixCounterSpan _smartMatrixCounterSpan;
-        private SmartMatrixCounterSpanParallel _smartMatrixCounterSpanParallel;
+        private SmartMatrixCounterBasic _smartMatrixCounterSpan;
+        private SmartMatrixCounterParallel _smartMatrixCounterSpanParallel;
 
-        private SmartMatrixFlyweightCounterSpan _smartMatrixFlyweightCounterSpan;
-        private SmartMatrixFlyweightCounterSpanParallel _smartMatrixFlyweightCounterSpanParallel;
+        private SmartMatrixFlyweightCounterBasic _smartMatrixFlyweightCounterSpan;
+        private SmartMatrixFlyweightCounterParallel _smartMatrixFlyweightCounterSpanParallel;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -122,11 +94,11 @@ namespace WordSearch.Benchmark
 
             _matrix = new Matrix(matrixsource);
 
-            _smartMatrixCounterSpan = new SmartMatrixCounterSpan();
-            _smartMatrixCounterSpanParallel = new SmartMatrixCounterSpanParallel();
+            _smartMatrixCounterSpan = new SmartMatrixCounterBasic();
+            _smartMatrixCounterSpanParallel = new SmartMatrixCounterParallel();
 
-            _smartMatrixFlyweightCounterSpan = new SmartMatrixFlyweightCounterSpan();
-            _smartMatrixFlyweightCounterSpanParallel = new SmartMatrixFlyweightCounterSpanParallel();
+            _smartMatrixFlyweightCounterSpan = new SmartMatrixFlyweightCounterBasic();
+            _smartMatrixFlyweightCounterSpanParallel = new SmartMatrixFlyweightCounterParallel();
         }
 
         [GlobalCleanup]

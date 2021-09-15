@@ -8,7 +8,8 @@ namespace WordSearch.Benchmark
         [Params(8, 16, 64)]
         public int SizeMatrix;
 
-        private Matrix _matrix = null;
+        private Matrix _matrixBasic = null;
+        private MatrixFlyweight _matrixFlyweight = null;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -18,26 +19,62 @@ namespace WordSearch.Benchmark
 
             var matrixsource = Utils.RepeatMatrixBuilderAppend(pattern, repeat);
 
-            _matrix = new Matrix(matrixsource);
-        }
-
-        [GlobalCleanup]
-        public void GlobalCleanup() => _matrix = null;
-
-        [Benchmark]
-        [Arguments("wind")]
-        [Arguments("eplmdepl")]
-        public void CountVerticalOucrrencesWord(string word)
-        {
-            _matrix.CountVerticalOcurrences(word);
+            _matrixBasic = new Matrix(matrixsource);
+            _matrixFlyweight = new MatrixFlyweight(matrixsource);
         }
 
         [Benchmark]
         [Arguments("wind")]
         [Arguments("eplmdepl")]
-        public void CountVerticalOucrrencesWordSpan(string word)
+        public void MatrixBasicCountHorizontalOucrrencesWord(string word)
         {
-            _matrix.CountVerticalOcurrencesSpan(word);
+            _matrixBasic.CountHorizontalOcurrences(word);
+        }
+
+        [Benchmark]
+        [Arguments("wind")]
+        [Arguments("eplmdepl")]
+        public void MatrixFlyweightCountHorizontalOucrrencesWord(string word)
+        {
+            _matrixFlyweight.CountHorizontalOcurrences(word);
+        }
+    }
+
+    [MemoryDiagnoser]
+    public class MatrixCountVerticalOcurrencesNotLoopBenchmarks
+    {
+        [Params(8, 16, 64)]
+        public int SizeMatrix;
+
+        private Matrix _matrixBasic = null;
+        private MatrixFlyweight _matrixFlyweight = null;
+
+        [GlobalSetup]
+        public void GlobalSetup()
+        {
+            var pattern = Utils.PatternMatrix;
+            var repeat = SizeMatrix / pattern.Length;
+
+            var matrixsource = Utils.RepeatMatrixBuilderAppend(pattern, repeat);
+
+            _matrixBasic = new Matrix(matrixsource);
+            _matrixFlyweight = new MatrixFlyweight(matrixsource);
+        }
+
+        [Benchmark]
+        [Arguments("wind")]
+        [Arguments("eplmdepl")]
+        public void MatrixBasicCountHorizontalOucrrencesWord(string word)
+        {
+            _matrixBasic.CountHorizontalOcurrences(word);
+        }
+
+        [Benchmark]
+        [Arguments("wind")]
+        [Arguments("eplmdepl")]
+        public void MatrixFlyweightCountHorizontalOucrrencesWord(string word)
+        {
+            _matrixFlyweight.CountHorizontalOcurrences(word);
         }
     }
 }
