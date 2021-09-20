@@ -18,7 +18,7 @@ namespace WordSearch
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
-            var smartsearch = SmartMatrixCounterStrategy.SelectBestFor(_matrix, wordstream);
+            var smartsearch = MatrixSmartSeracherStrategy.SelectBestFor(_matrix, wordstream);
             var ranking = smartsearch.Rank(_matrix, wordstream);
 
             return ranking.Top(10);

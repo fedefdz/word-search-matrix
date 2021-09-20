@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WordSearch\WordSearch.csproj" />
+    <ProjectReference Include="..\..\src\WordSearch\WordSearch.csproj" />
   </ItemGroup>
 
 </Project>

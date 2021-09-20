@@ -5,34 +5,37 @@ using System.Threading.Tasks;
 
 namespace WordSearch
 {
-    public interface ISmartMatrixCounter
+    public interface IMatrixSmartSearcher
     {
         Ranking Rank(Matrix matrix, IEnumerable<string> wordstream);
     }
 
-    public class SmartMatrixCounterStrategy
+    public class MatrixSmartSeracherStrategy
     {
-        public static ISmartMatrixCounter SelectBestFor(Matrix matrix, IEnumerable<string> wordstream) => matrix.N switch
+        public static IMatrixSmartSearcher SelectBestFor(Matrix matrix, IEnumerable<string> wordstream) => matrix.N switch
         {
-            > 16 => new SmartMatrixCounterParallel(),
+            > 16 => new MatrixSmartSearcherParallel(),
 
-            16 when wordstream.Count() > 5 => new SmartMatrixCounterParallel(),
+            16 when wordstream.Count() > 5 => new MatrixSmartSearcherParallel(),
 
-            _ => new SmartMatrixCounterBasic(),
+            _ => new MatrixSmartSearcherSequential(),
         };
     }
 
-    public class SmartMatrixCounterBasic : SmartMatrixGenericCounterBasic<Matrix> { }
+    public class MatrixSmartSearcherSequential : MatrixSmartSearcherBaseSequential<Matrix> { }
 
-    public class SmartMatrixFlyweightCounterBasic : SmartMatrixGenericCounterBasic<MatrixFlyweight> { }
+    public class MatrixFlyweightSmartSearcherSequential : MatrixSmartSearcherBaseSequential<MatrixFlyweight> { }
 
-    public abstract class SmartMatrixGenericCounterBasic<T> : ISmartMatrixCounter where T : Matrix
+    public abstract class MatrixSmartSearcherBaseSequential<T> : IMatrixSmartSearcher where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
             var ranking = new Ranking(wordstream);
             foreach (var key in ranking.Keys)
             {
+                if (key.Length > matrix.N)
+                    continue;
+
                 var reverse = new string(key.Reverse().ToArray());
 
                 ranking[key] += matrix.CountHorizontalOcurrences(key);
@@ -45,18 +48,19 @@ namespace WordSearch
         }
     }
 
-    public class SmartMatrixCounterParallel : SmartMatrixGenericCounterParallel<Matrix> { }
+    public class MatrixSmartSearcherParallel : MatrixSmartSearcherBaseParallel<Matrix> { }
 
-    public class SmartMatrixFlyweightCounterParallel : SmartMatrixGenericCounterParallel<MatrixFlyweight> { }
+    public class MatrixFlyweightSmartSearcherParallel : MatrixSmartSearcherBaseParallel<MatrixFlyweight> { }
 
-    public abstract class SmartMatrixGenericCounterParallel<T> : ISmartMatrixCounter where T : Matrix
+    public abstract class MatrixSmartSearcherBaseParallel<T> : IMatrixSmartSearcher where T : Matrix
     {
         public Ranking Rank(Matrix matrix, IEnumerable<string> wordstream)
         {
             var ranking = new Ranking(wordstream);
-            var tasks = new Task[ranking.Keys.Count * 4];
+            var safeKeys = ranking.Keys.Where(key => key.Length <= matrix.N).ToArray();
+            var tasks = new Task[safeKeys.Length * 4];
             var idx = 0;
-            foreach (var key in ranking.Keys)
+            foreach (var key in safeKeys)
             {
                 var reverse = new string(key.Reverse().ToArray());
 
@@ -70,18 +74,5 @@ namespace WordSearch
             Task.WaitAll(tasks);
             return ranking;
         }
-    }
-
-    public class Ranking : Dictionary<string, int>
-    {
-        public Ranking(IEnumerable<string> words)
-        {
-            foreach (var word in words)
-                this.TryAdd(word, 0);
-        }
-
-        public IEnumerable<string> Top(int top) => this.OrderByDescending(x => x.Value)
-            .Where(x => x.Value > 0)
-            .Take(top).Select(x => x.Key);
     }
 }

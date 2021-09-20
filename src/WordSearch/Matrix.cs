@@ -34,7 +34,7 @@ namespace WordSearch
             for (int row = 0; row < Rows; row++)
             {
                 var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpanLoop(sentence, word);
             }
 
             return ocurrences;
@@ -46,7 +46,7 @@ namespace WordSearch
             for (int col = 0; col < Columns; col++)
             {
                 var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpanLoop(sentence, word);
             }
 
             return ocurrences;

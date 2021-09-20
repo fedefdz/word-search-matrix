@@ -17,6 +17,15 @@ namespace WordSearch.Benchmark
             "chilllkj"
         };
 
+        public static readonly string[] SampleMatrix = new string[]
+        {
+            "abcdc",
+            "fgwio",
+            "chill",
+            "pqnsd",
+            "uvdxy"
+        };
+
         public static string RepeatStringBuilderAppend(string s, int n) => new StringBuilder(s.Length * n)
             .AppendJoin(s, new string[n + 1])
             .ToString();

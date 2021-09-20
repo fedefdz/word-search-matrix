@@ -24,7 +24,7 @@ namespace WordSearch
             foreach (int row in _flyweight[word[0]].Rows)
             {
                 var sentence = _matrix.RowAsString(row);
-                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpanLoop(sentence, word);
             }
             return ocurrences;
         }
@@ -39,7 +39,7 @@ namespace WordSearch
             foreach (int col in _flyweight[word[0]].Cols)
             {
                 var sentence = _matrix.ColumnAsString(col);
-                ocurrences += StringUtils.CountOcurrencesSpan(sentence, word);
+                ocurrences += StringUtils.CountOcurrencesSpanLoop(sentence, word);
             }
 
             return ocurrences;
