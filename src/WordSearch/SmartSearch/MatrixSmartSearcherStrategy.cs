@@ -9,17 +9,9 @@ namespace WordSearch.SmartSearch
     {
         public static IMatrixSmartSearcher<MatrixFlyweight> SelectBestFor(MatrixFlyweight matrix, IEnumerable<string> wordstream) => matrix.N switch
         {
-            <= 20 => new MatrixFlyweightSmartSearcherSequential(),
-
-            <= 35 when wordstream.Count() <= 12 => new MatrixFlyweightSmartSearcherSequential(),
-            <= 35 => new MatrixFlyweightSmartSearcherParallel(),
-
-            <= 50 when wordstream.Count() <= 3 => new MatrixFlyweightSmartSearcherSequential(),
-            <= 50 => new MatrixFlyweightSmartSearcherParallel(),
-
-            <= 60 when wordstream.Count() == 1 => new MatrixFlyweightSmartSearcherSequential(),
-            <= 60 => new MatrixFlyweightSmartSearcherParallel(),
-
+            < 45 => new MatrixFlyweightSmartSearcherSequential(),
+            >= 45 and < 60 when wordstream.Count() < 12 => new MatrixFlyweightSmartSearcherSequential(),
+            60 when wordstream.Count() == 1 => new MatrixFlyweightSmartSearcherSequential(),
             _ => new MatrixFlyweightSmartSearcherParallel()
         };
     }

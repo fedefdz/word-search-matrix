@@ -1,5 +1,4 @@
-﻿using AutoFixture;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -30,8 +29,8 @@ namespace WordSearch.Tests
         [InlineData(25, 5)]
         [InlineData(30, 12)]
         [InlineData(35, 5)]
-        [InlineData(35, 12)]
-        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_LessOrEqual_Than_35_And_Stream_LessOrEqual_12_Should_Return_Searcher_Sequential(int N, int streamLenght)
+        [InlineData(44, 15)]
+        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_Less_Than_45_Should_Return_Searcher_Sequential(int N, int streamLenght)
         {
             var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
             var random = new Random();
@@ -44,28 +43,10 @@ namespace WordSearch.Tests
         }
 
         [Theory]
-        [InlineData(21, 13)]
-        [InlineData(25, 15)]
-        [InlineData(30, 20)]
-        [InlineData(35, 20)]
-        [InlineData(35, 13)]
-        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_LessOrEqual_Than_35_And_Stream_Greater_12_Should_Return_Searcher_Parallel(int N, int streamLenght)
-        {
-            var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
-            var random = new Random();
-            var minLenght = random.Next(5);
-            var stream = RandomWordStream(streamLenght, streamLenght, minLenght, minLenght + 10);
-
-            var searcher = SmartSearch.MatrixSmartSeracherStrategy.SelectBestFor(matrix, stream);
-
-            Assert.IsType<SmartSearch.Parallel.MatrixFlyweightSmartSearcherParallel>(searcher);
-        }
-
-        [Theory]
-        [InlineData(36, 1)]
+        [InlineData(45, 11)]
         [InlineData(40, 2)]
-        [InlineData(50, 3)]
-        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_LessOrEqual_Than_50_And_Stream_LessOrEqual_03_Should_Return_Searcher_Sequential(int N, int streamLenght)
+        [InlineData(59, 11)]
+        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_Between_45_And_59_Stream_Less_Than_12_Should_Return_Searcher_Sequential(int N, int streamLenght)
         {
             var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
             var random = new Random();
@@ -75,22 +56,6 @@ namespace WordSearch.Tests
             var searcher = SmartSearch.MatrixSmartSeracherStrategy.SelectBestFor(matrix, stream);
 
             Assert.IsType<SmartSearch.Sequential.MatrixFlyweightSmartSearcherSequential>(searcher);
-        }
-
-        [Theory]
-        [InlineData(36, 4)]
-        [InlineData(40, 10)]
-        [InlineData(50, 7)]
-        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_LessOrEqual_Than_50_And_Stream_Greater_03_Should_Return_Searcher_Parallel(int N, int streamLenght)
-        {
-            var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
-            var random = new Random();
-            var minLenght = random.Next(5);
-            var stream = RandomWordStream(streamLenght, streamLenght, minLenght, minLenght + 10);
-
-            var searcher = SmartSearch.MatrixSmartSeracherStrategy.SelectBestFor(matrix, stream);
-
-            Assert.IsType<SmartSearch.Parallel.MatrixFlyweightSmartSearcherParallel>(searcher);
         }
 
         [Theory]
@@ -110,10 +75,10 @@ namespace WordSearch.Tests
         }
 
         [Theory]
-        [InlineData(51, 2)]
-        [InlineData(55, 10)]
         [InlineData(60, 2)]
-        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_LessOrEqual_Than_60_And_Stream_Greater_01_Should_Return_Searcher_Parallel(int N, int streamLenght)
+        [InlineData(64, 10)]
+        [InlineData(64, 2)]
+        public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_GreaterOrEqual_Than_60_And_Stream_Greater_Than_01_Should_Return_Searcher_Parallel(int N, int streamLenght)
         {
             var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
             var random = new Random();
@@ -127,8 +92,8 @@ namespace WordSearch.Tests
 
         [Theory]
         [InlineData(61, 1)]
-        [InlineData(64, 10)]
-        [InlineData(64, 2)]
+        [InlineData(64, 1)]
+        [InlineData(64, 15)]
         public void MatrixSmartSeracherStrategy_SelectBestFor_Matrix_N_Greater_Than_60_Should_Return_Searcher_Parallel(int N, int streamLenght)
         {
             var matrix = new MatrixFlyweight(GenerateEnumerableStringMatrix(N));
