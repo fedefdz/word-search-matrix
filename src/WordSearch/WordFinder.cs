@@ -10,16 +10,16 @@ namespace WordSearch
 
     public class WordFinder : IWordFinder
     {
-        private Matrix _matrix;
+        private MatrixFlyweight _matrix;
 
         public WordFinder(IEnumerable<string> matrix)
         {
-            _matrix = new Matrix(matrix);
+            _matrix = new MatrixFlyweight(matrix);
         }
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
-            var smartsearch = new SmartSearch.Sequential.MatrixSmartSearcherSequential(); //MatrixSmartSeracherStrategy.SelectBestFor(_matrix, wordstream);
+            var smartsearch = MatrixSmartSeracherStrategy.SelectBestFor(_matrix, wordstream);
             var ranking = smartsearch.Rank(_matrix, wordstream);
 
             return ranking.Top(10);

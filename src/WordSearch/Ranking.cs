@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace WordSearch
@@ -9,6 +10,10 @@ namespace WordSearch
         {
             foreach (var word in words)
                 this.TryAdd(word, 0);
+        }
+
+        public Ranking(IDictionary<string, int> dictionary) : base(dictionary)
+        {
         }
 
         public IEnumerable<string> Top(int top) => this.OrderByDescending(x => x.Value)

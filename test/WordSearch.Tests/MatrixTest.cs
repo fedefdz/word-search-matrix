@@ -24,7 +24,7 @@ namespace WordSearch.Tests
 
             var actual = matrix.RowAsString(2);
 
-            Assert.Equal("chill", actual);
+            Assert.Equal("dwind", actual);
             Assert.Equal(5, actual.Length);
         }
 
@@ -48,7 +48,7 @@ namespace WordSearch.Tests
 
             var actual = matrix.ColumnAsString(2);
 
-            Assert.Equal("cwind", actual);
+            Assert.Equal("swind", actual);
             Assert.Equal(5, actual.Length);
         }
 

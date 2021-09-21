@@ -32,9 +32,9 @@ namespace WordSearch.Tests
         {
             var wordstream = new[]
             {
-                "cold", "wind", "snow", "chill",
-                "cold", "wind", "snow", "chill",
-                "cold", "wind"
+                "sun", "wind", "snow", "day",
+                "sun", "wind", "snow", "day",
+                "sun", "wind"
             };
 
             // sut not contains 'snow' word
@@ -44,22 +44,28 @@ namespace WordSearch.Tests
             Assert.Equal(3, result.Count());
         }
 
-        [Fact]
-        public void WordFinder_Find_Show_Result()
+        [Theory]
+        [InlineData(5)]
+        [InlineData(10)]
+        [InlineData(30)]
+        [InlineData(50)]
+        [InlineData(60)]
+        public void WordFinder_Find_Show_Ranking_Result(int N)
         {
-            var wordstream = new[] { "cold", "wind", "snow", "chill" };
+            var wordstream = new[] { "sun", "wind", "day", "snow", "day" };
 
             // MatrixBig contains this rank
-            // chill -> 3
-            // cold -> 2
-            // wind -> 1
-            var sut = new WordFinder(Stubs.MatrixBig);
+            // day -> 3
+            // wind -> 2
+            // sun -> 1
+            var matrixsource = Stubs.RepeatMatrixBuilderAppend(Stubs.MatrixSample, N / Stubs.MatrixSample.Length);
+            var sut = new WordFinder(matrixsource);
             var result = sut.Find(wordstream);
 
             Assert.Collection(result,
-                item => Assert.Equal("chill", item),
-                item => Assert.Equal("cold", item),
-                item => Assert.Equal("wind", item));
+                item => Assert.Equal("day", item),
+                item => Assert.Equal("wind", item),
+                item => Assert.Equal("sun", item));
         }
     }
 }
