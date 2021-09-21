@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using WordSearch.Utils;
+using Xunit;
 
 namespace WordSearch.Tests
 {

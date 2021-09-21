@@ -1,9 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
+using WSU = WordSearch.Utils;
 
-namespace WordSearch.Benchmark
+namespace WordSearch.Benchmark.StringUtils
 {
-    [MemoryDiagnoser]
     public class StringCountOcurrencesBenchmarks
     {
         [Params(8, 16, 64)]
@@ -25,24 +25,15 @@ namespace WordSearch.Benchmark
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrences(string word)
-        {
-            StringUtils.CountOcurrences(_source, word);
-        }
+        public void CountOucrrences(string word) => WSU.StringUtils.CountOcurrences(_source, word);
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpan(string word)
-        {
-            StringUtils.CountOcurrencesSpan(_source, word);
-        }
+        public void CountOucrrencesSpan(string word) => WSU.StringUtils.CountOcurrencesSpan(_source, word);
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesPattern(string word)
-        {
-            StringUtils.CountOcurrencesPattern(_source, word);
-        }
+        public void CountOucrrencesPattern(string word) => WSU.StringUtils.CountOcurrencesPattern(_source, word);
 
         public static IEnumerable<string> Words()
         {
@@ -53,7 +44,6 @@ namespace WordSearch.Benchmark
         }
     }
 
-    [MemoryDiagnoser]
     public class StringCountOcurrencesBetweenSpanBenchmarks
     {
         [Params(5, 15, 30, 60)]
@@ -75,28 +65,25 @@ namespace WordSearch.Benchmark
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpan(string word) => StringUtils.CountOcurrencesSpan(_source, word);
+        public void CountOucrrencesSpan(string word) => WSU.StringUtils.CountOcurrencesSpan(_source, word);
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpanOptimist(string word) => StringUtils.CountOcurrencesSpanOptimist(_source, word);
+        public void CountOucrrencesSpanOptimist(string word) => WSU.StringUtils.CountOcurrencesSpanOptimist(_source, word);
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpanLoop(string word) => StringUtils.CountOcurrencesSpanLoop(_source, word);
+        public void CountOucrrencesSpanLoop(string word) => WSU.StringUtils.CountOcurrencesSpanLoop(_source, word);
 
         public static IEnumerable<string> Words()
         {
             yield return "cold";
-            //yield return "wind";
             yield return "coldx";
             yield return "coldxcoldxcoldx";
-            //yield return "windxwindxwindx";
         }
     }
 
-    [MemoryDiagnoser]
-    public class StringCountOcurrencesBetweenSpanBenchmarks2
+    public class StringCountOcurrenceSpanRecursiveBenchmarks
     {
         [Params(5, 15, 20, 40, 60)]
         public int N;
@@ -117,11 +104,11 @@ namespace WordSearch.Benchmark
 
         [Benchmark(Baseline = true)]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpan(string word) => StringUtils.CountOcurrencesSpan(_source, word);
+        public void CountOucrrencesSpan(string word) => WSU.StringUtils.CountOcurrencesSpan(_source, word);
 
         [Benchmark]
         [ArgumentsSource(nameof(Words))]
-        public void CountOucrrencesSpanLoop(string word) => StringUtils.CountOcurrencesSpanLoop(_source, word);
+        public void CountOucrrencesSpanLoop(string word) => WSU.StringUtils.CountOcurrencesSpanLoop(_source, word);
 
         public static IEnumerable<string> Words()
         {

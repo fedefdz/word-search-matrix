@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WordSearch.SmartSearch;
 
 namespace WordSearch
 {
@@ -18,7 +19,7 @@ namespace WordSearch
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
-            var smartsearch = MatrixSmartSeracherStrategy.SelectBestFor(_matrix, wordstream);
+            var smartsearch = new SmartSearch.Sequential.MatrixSmartSearcherSequential(); //MatrixSmartSeracherStrategy.SelectBestFor(_matrix, wordstream);
             var ranking = smartsearch.Rank(_matrix, wordstream);
 
             return ranking.Top(10);

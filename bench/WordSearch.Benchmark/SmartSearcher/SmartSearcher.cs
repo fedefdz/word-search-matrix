@@ -1,5 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
+using WordSearch.SmartSearch.Parallel;
+using WordSearch.SmartSearch.Sequential;
 
 namespace WordSearch.Benchmark.SmartSearch
 {
@@ -8,6 +10,8 @@ namespace WordSearch.Benchmark.SmartSearch
         private readonly int _sizeMatrix;
 
         private Matrix _matrix;
+        private MatrixFlyweight _matrixFlyweight;
+
         private MatrixSmartSearcherSequential _matrixSequential;
         private MatrixFlyweightSmartSearcherSequential _matrixFlyweightSequential;
 
@@ -40,6 +44,7 @@ namespace WordSearch.Benchmark.SmartSearch
             var matrixsource = Utils.RepeatMatrixBuilderAppend(pattern, repeat);
 
             _matrix = new Matrix(matrixsource);
+            _matrixFlyweight = new MatrixFlyweight(matrixsource);
 
             _matrixSequential = new MatrixSmartSearcherSequential();
             _matrixParallel = new MatrixSmartSearcherParallel();
@@ -73,12 +78,12 @@ namespace WordSearch.Benchmark.SmartSearch
         [Benchmark]
         [BenchmarkCategory("sequential")]
         [ArgumentsSource(nameof(WordstreamData))]
-        public void SearcherFlyweightSequential(string[] wordstream) => _matrixFlyweightSequential.Rank(_matrix, wordstream);
+        public void SearcherFlyweightSequential(string[] wordstream) => _matrixFlyweightSequential.Rank(_matrixFlyweight, wordstream);
 
         [Benchmark]
         [BenchmarkCategory("parallel")]
         [ArgumentsSource(nameof(WordstreamData))]
-        public void SeracherFlyweightParallel(string[] wordstream) => _matrixFlyweightParallel.Rank(_matrix, wordstream);
+        public void SeracherFlyweightParallel(string[] wordstream) => _matrixFlyweightParallel.Rank(_matrixFlyweight, wordstream);
     }
 
     public class SmartSearchMatrixN60Benchmark : SmartSearcherBaseBenchmark

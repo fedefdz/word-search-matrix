@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace WordSearch
+namespace WordSearch.Utils
 {
     public static class StringUtils
     {
