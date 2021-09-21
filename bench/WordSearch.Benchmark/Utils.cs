@@ -38,9 +38,9 @@ namespace WordSearch.Benchmark
                 matrix[i] = RepeatStringBuilderAppend(matrixpattern[i], n);
             }
 
-            for (int j = matrixpattern.Length - 1; j < matrixpattern.Length * n; j++)
+            for (int j = matrixpattern.Length; j < matrixpattern.Length * n; j++)
             {
-                matrix[j] = matrix[j - (matrixpattern.Length - 1)];
+                matrix[j] = matrix[j - (matrixpattern.Length)];
             }
 
             return matrix;
