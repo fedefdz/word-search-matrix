@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>WordSearch.Benchmark.SmartSearch.SmartSearchMatrixN45Benchmark-20210921-082704</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19042.1052 (20H2/October2020Update)
+Intel Core i7-6600U CPU 2.60GHz (Skylake), 1 CPU, 4 logical and 2 physical cores
+.NET SDK=5.0.101
+  [Host]     : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+  DefaultJob : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>               Method</th><th>wordstream</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>SearcherMatrixSequential</td><td>String[12]</td><td>360.41 &mu;s</td><td>5.875 &mu;s</td><td>5.496 &mu;s</td><td>241.2109</td><td>493 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[12]</td><td>306.62 &mu;s</td><td>5.696 &mu;s</td><td>5.594 &mu;s</td><td>284.1797</td><td>573 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[12]</td><td>198.96 &mu;s</td><td>2.405 &mu;s</td><td>2.132 &mu;s</td><td>93.0176</td><td>190 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[12]</td><td>183.54 &mu;s</td><td>3.036 &mu;s</td><td>2.691 &mu;s</td><td>115.9668</td><td>234 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[1]</td><td>30.99 &mu;s</td><td>0.615 &mu;s</td><td>0.732 &mu;s</td><td>20.1416</td><td>41 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[1]</td><td>49.84 &mu;s</td><td>0.832 &mu;s</td><td>0.738 &mu;s</td><td>28.9917</td><td>58 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[1]</td><td>19.82 &mu;s</td><td>0.288 &mu;s</td><td>0.241 &mu;s</td><td>10.2844</td><td>21 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[1]</td><td>34.23 &mu;s</td><td>0.678 &mu;s</td><td>1.637 &mu;s</td><td>14.0991</td><td>28 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[3]</td><td>82.25 &mu;s</td><td>1.616 &mu;s</td><td>1.349 &mu;s</td><td>60.1807</td><td>123 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[3]</td><td>94.07 &mu;s</td><td>1.411 &mu;s</td><td>1.785 &mu;s</td><td>68.7256</td><td>139 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[3]</td><td>41.25 &mu;s</td><td>0.494 &mu;s</td><td>0.438 &mu;s</td><td>21.6064</td><td>44 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[3]</td><td>47.67 &mu;s</td><td>0.917 &mu;s</td><td>1.056 &mu;s</td><td>26.0620</td><td>53 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[6]</td><td>179.49 &mu;s</td><td>3.179 &mu;s</td><td>3.904 &mu;s</td><td>120.6055</td><td>246 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[6]</td><td>174.99 &mu;s</td><td>3.361 &mu;s</td><td>3.597 &mu;s</td><td>150.3906</td><td>304 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[6]</td><td>93.24 &mu;s</td><td>1.566 &mu;s</td><td>1.307 &mu;s</td><td>45.1660</td><td>92 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[6]</td><td>103.61 &mu;s</td><td>1.326 &mu;s</td><td>1.241 &mu;s</td><td>59.3262</td><td>120 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[9]</td><td>266.88 &mu;s</td><td>5.173 &mu;s</td><td>4.839 &mu;s</td><td>181.1523</td><td>370 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[9]</td><td>283.46 &mu;s</td><td>5.644 &mu;s</td><td>10.320 &mu;s</td><td>226.8066</td><td>458 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[9]</td><td>139.59 &mu;s</td><td>2.470 &mu;s</td><td>2.062 &mu;s</td><td>66.8945</td><td>137 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[9]</td><td>142.08 &mu;s</td><td>2.498 &mu;s</td><td>2.086 &mu;s</td><td>84.7168</td><td>171 KB</td>
+</tr></tbody></table>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>WordSearch.Benchmark.StringUtils.StringCountOcurrencesBenchmarks-20210922-184026</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19042.1052 (20H2/October2020Update)
+Intel Core i7-6600U CPU 2.60GHz (Skylake), 1 CPU, 4 logical and 2 physical cores
+.NET SDK=5.0.101
+  [Host]     : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+  DefaultJob : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>          Method</th><th>N</th><th>          word</th><th>  Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>CountOucrrences</td><td>8</td><td>ab</td><td>60.124 ns</td><td>1.2296 ns</td><td>1.8023 ns</td><td>60.071 ns</td><td>0.0153</td><td>32 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>8</td><td>ab</td><td>43.472 ns</td><td>0.8832 ns</td><td>1.7434 ns</td><td>43.079 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>8</td><td>ab</td><td>454.749 ns</td><td>9.1077 ns</td><td>11.1851 ns</td><td>450.867 ns</td><td>0.2675</td><td>560 B</td>
+</tr><tr><td>CountOucrrences</td><td>8</td><td>abcdabcd</td><td>42.666 ns</td><td>0.7053 ns</td><td>0.5506 ns</td><td>42.537 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>8</td><td>abcdabcd</td><td>16.032 ns</td><td>0.3451 ns</td><td>0.3059 ns</td><td>15.977 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>8</td><td>abcdabcd</td><td>286.704 ns</td><td>5.7009 ns</td><td>8.8757 ns</td><td>285.424 ns</td><td>0.1683</td><td>352 B</td>
+</tr><tr><td>CountOucrrences</td><td>8</td><td>abcdabcdabcdabcd</td><td>7.863 ns</td><td>0.1793 ns</td><td>0.3140 ns</td><td>7.760 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>8</td><td>abcdabcdabcdabcd</td><td>7.475 ns</td><td>0.1182 ns</td><td>0.0987 ns</td><td>7.462 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>8</td><td>abcdabcdabcdabcd</td><td>80.691 ns</td><td>1.6613 ns</td><td>2.7295 ns</td><td>80.125 ns</td><td>0.0421</td><td>88 B</td>
+</tr><tr><td>CountOucrrences</td><td>8</td><td>abcda(...)dabcd [32]</td><td>7.706 ns</td><td>0.1877 ns</td><td>0.1756 ns</td><td>7.672 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>8</td><td>abcda(...)dabcd [32]</td><td>7.522 ns</td><td>0.1623 ns</td><td>0.1355 ns</td><td>7.506 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>8</td><td>abcda(...)dabcd [32]</td><td>81.120 ns</td><td>1.6134 ns</td><td>2.0979 ns</td><td>80.378 ns</td><td>0.0421</td><td>88 B</td>
+</tr><tr><td>CountOucrrences</td><td>16</td><td>ab</td><td>105.840 ns</td><td>2.3038 ns</td><td>6.3454 ns</td><td>103.655 ns</td><td>0.0191</td><td>40 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>16</td><td>ab</td><td>78.173 ns</td><td>1.8671 ns</td><td>5.2966 ns</td><td>76.530 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>16</td><td>ab</td><td>796.998 ns</td><td>15.7713 ns</td><td>27.2047 ns</td><td>790.595 ns</td><td>0.4663</td><td>976 B</td>
+</tr><tr><td>CountOucrrences</td><td>16</td><td>abcdabcd</td><td>62.323 ns</td><td>1.2850 ns</td><td>1.1391 ns</td><td>62.284 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>16</td><td>abcdabcd</td><td>31.745 ns</td><td>0.6384 ns</td><td>0.5972 ns</td><td>31.707 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>16</td><td>abcdabcd</td><td>487.813 ns</td><td>9.6479 ns</td><td>9.4756 ns</td><td>486.174 ns</td><td>0.2670</td><td>560 B</td>
+</tr><tr><td>CountOucrrences</td><td>16</td><td>abcdabcdabcdabcd</td><td>54.207 ns</td><td>1.0550 ns</td><td>1.2559 ns</td><td>53.861 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>16</td><td>abcdabcdabcdabcd</td><td>16.745 ns</td><td>0.2816 ns</td><td>0.2351 ns</td><td>16.674 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>16</td><td>abcdabcdabcdabcd</td><td>319.699 ns</td><td>5.8917 ns</td><td>11.0660 ns</td><td>317.732 ns</td><td>0.1683</td><td>352 B</td>
+</tr><tr><td>CountOucrrences</td><td>16</td><td>abcda(...)dabcd [32]</td><td>7.868 ns</td><td>0.1872 ns</td><td>0.1563 ns</td><td>7.883 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>16</td><td>abcda(...)dabcd [32]</td><td>7.597 ns</td><td>0.1832 ns</td><td>0.1530 ns</td><td>7.604 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>16</td><td>abcda(...)dabcd [32]</td><td>85.928 ns</td><td>1.7543 ns</td><td>1.6410 ns</td><td>85.741 ns</td><td>0.0421</td><td>88 B</td>
+</tr><tr><td>CountOucrrences</td><td>64</td><td>ab</td><td>379.474 ns</td><td>7.3341 ns</td><td>8.7307 ns</td><td>377.002 ns</td><td>0.0420</td><td>88 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>64</td><td>ab</td><td>305.677 ns</td><td>6.1426 ns</td><td>14.5986 ns</td><td>301.256 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>64</td><td>ab</td><td>2,951.095 ns</td><td>54.4652 ns</td><td>124.0448 ns</td><td>2,923.082 ns</td><td>1.7700</td><td>3,712 B</td>
+</tr><tr><td>CountOucrrences</td><td>64</td><td>abcdabcd</td><td>184.984 ns</td><td>3.7313 ns</td><td>7.5373 ns</td><td>183.118 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>64</td><td>abcdabcd</td><td>145.813 ns</td><td>2.9455 ns</td><td>5.0016 ns</td><td>144.117 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>64</td><td>abcdabcd</td><td>1,698.263 ns</td><td>31.8145 ns</td><td>71.1576 ns</td><td>1,674.502 ns</td><td>0.9060</td><td>1,896 B</td>
+</tr><tr><td>CountOucrrences</td><td>64</td><td>abcdabcdabcdabcd</td><td>145.726 ns</td><td>2.7896 ns</td><td>3.1007 ns</td><td>144.706 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>64</td><td>abcdabcdabcdabcd</td><td>71.874 ns</td><td>1.4200 ns</td><td>1.4583 ns</td><td>71.702 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>64</td><td>abcdabcdabcdabcd</td><td>985.573 ns</td><td>16.7419 ns</td><td>13.9802 ns</td><td>982.708 ns</td><td>0.4654</td><td>976 B</td>
+</tr><tr><td>CountOucrrences</td><td>64</td><td>abcda(...)dabcd [32]</td><td>127.470 ns</td><td>1.4692 ns</td><td>1.2268 ns</td><td>127.080 ns</td><td>0.0114</td><td>24 B</td>
+</tr><tr><td>CountOucrrencesSpan</td><td>64</td><td>abcda(...)dabcd [32]</td><td>32.913 ns</td><td>0.6540 ns</td><td>0.5797 ns</td><td>32.889 ns</td><td>-</td><td>-</td>
+</tr><tr><td>CountOucrrencesPattern</td><td>64</td><td>abcda(...)dabcd [32]</td><td>688.198 ns</td><td>12.5080 ns</td><td>20.8980 ns</td><td>683.345 ns</td><td>0.2670</td><td>560 B</td>
+</tr></tbody></table>
+</body>
+</html>

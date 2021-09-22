@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>WordSearch.Benchmark.SmartSearch.SmartSearchMatrixN20Benchmark-20210921-140022</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19042.1052 (20H2/October2020Update)
+Intel Core i7-6600U CPU 2.60GHz (Skylake), 1 CPU, 4 logical and 2 physical cores
+.NET SDK=5.0.101
+  [Host]     : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+  DefaultJob : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>               Method</th><th>wordstream</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>SearcherMatrixSequential</td><td>String[12]</td><td>92.590 &mu;s</td><td>1.1414 &mu;s</td><td>1.0119 &mu;s</td><td>60.5469</td><td>124 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[12]</td><td>100.022 &mu;s</td><td>1.9797 &mu;s</td><td>3.0232 &mu;s</td><td>75.3174</td><td>153 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[12]</td><td>46.919 &mu;s</td><td>0.8888 &mu;s</td><td>0.7422 &mu;s</td><td>24.0479</td><td>49 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[12]</td><td>68.509 &mu;s</td><td>1.3404 &mu;s</td><td>3.7587 &mu;s</td><td>32.8369</td><td>67 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[1]</td><td>8.284 &mu;s</td><td>0.1375 &mu;s</td><td>0.1219 &mu;s</td><td>5.0812</td><td>10 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[1]</td><td>20.691 &mu;s</td><td>0.3066 &mu;s</td><td>0.5606 &mu;s</td><td>7.6599</td><td>16 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[1]</td><td>5.068 &mu;s</td><td>0.0783 &mu;s</td><td>0.0732 &mu;s</td><td>2.6474</td><td>5 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[1]</td><td>17.835 &mu;s</td><td>0.4097 &mu;s</td><td>1.1820 &mu;s</td><td>4.1504</td><td>8 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[3]</td><td>22.983 &mu;s</td><td>0.3344 &mu;s</td><td>0.2965 &mu;s</td><td>15.0146</td><td>31 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[3]</td><td>35.082 &mu;s</td><td>0.6832 &mu;s</td><td>0.8390 &mu;s</td><td>18.3716</td><td>37 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[3]</td><td>11.358 &mu;s</td><td>0.1808 &mu;s</td><td>0.1602 &mu;s</td><td>5.5389</td><td>11 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[3]</td><td>26.228 &mu;s</td><td>0.5178 &mu;s</td><td>0.5755 &mu;s</td><td>8.1177</td><td>16 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[6]</td><td>46.467 &mu;s</td><td>0.9165 &mu;s</td><td>0.9412 &mu;s</td><td>30.2124</td><td>62 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[6]</td><td>59.780 &mu;s</td><td>1.1505 &mu;s</td><td>1.4129 &mu;s</td><td>39.5508</td><td>80 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[6]</td><td>23.417 &mu;s</td><td>0.4425 &mu;s</td><td>0.4346 &mu;s</td><td>11.6577</td><td>24 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[6]</td><td>42.586 &mu;s</td><td>0.6970 &mu;s</td><td>1.0644 &mu;s</td><td>17.0898</td><td>35 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[9]</td><td>66.205 &mu;s</td><td>1.0162 &mu;s</td><td>0.9506 &mu;s</td><td>45.5322</td><td>93 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[9]</td><td>80.188 &mu;s</td><td>1.1283 &mu;s</td><td>1.0002 &mu;s</td><td>57.4951</td><td>116 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[9]</td><td>32.816 &mu;s</td><td>0.3846 &mu;s</td><td>0.3003 &mu;s</td><td>17.4561</td><td>36 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[9]</td><td>55.068 &mu;s</td><td>0.9392 &mu;s</td><td>1.0816 &mu;s</td><td>24.9023</td><td>50 KB</td>
+</tr></tbody></table>
+</body>
+</html>

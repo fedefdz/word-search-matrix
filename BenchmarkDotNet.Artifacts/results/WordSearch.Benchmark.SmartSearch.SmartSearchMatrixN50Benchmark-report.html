@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>WordSearch.Benchmark.SmartSearch.SmartSearchMatrixN50Benchmark-20210921-085622</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.13.1, OS=Windows 10.0.19042.1052 (20H2/October2020Update)
+Intel Core i7-6600U CPU 2.60GHz (Skylake), 1 CPU, 4 logical and 2 physical cores
+.NET SDK=5.0.101
+  [Host]     : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+  DefaultJob : .NET 5.0.3 (5.0.321.7212), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>               Method</th><th>wordstream</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Gen 0</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>SearcherMatrixSequential</td><td>String[12]</td><td>438.33 &mu;s</td><td>8.322 &mu;s</td><td>10.822 &mu;s</td><td>436.75 &mu;s</td><td>295.4102</td><td>604 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[12]</td><td>388.70 &mu;s</td><td>7.741 &mu;s</td><td>9.215 &mu;s</td><td>389.18 &mu;s</td><td>354.0039</td><td>713 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[12]</td><td>231.30 &mu;s</td><td>4.042 &mu;s</td><td>3.584 &mu;s</td><td>231.00 &mu;s</td><td>112.7930</td><td>231 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[12]</td><td>224.31 &mu;s</td><td>5.012 &mu;s</td><td>14.777 &mu;s</td><td>219.55 &mu;s</td><td>137.2070</td><td>277 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[1]</td><td>39.84 &mu;s</td><td>1.174 &mu;s</td><td>3.291 &mu;s</td><td>38.79 &mu;s</td><td>24.6582</td><td>50 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[1]</td><td>57.46 &mu;s</td><td>1.141 &mu;s</td><td>1.401 &mu;s</td><td>57.39 &mu;s</td><td>34.3628</td><td>69 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[1]</td><td>25.47 &mu;s</td><td>1.419 &mu;s</td><td>3.907 &mu;s</td><td>23.80 &mu;s</td><td>12.4207</td><td>25 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[1]</td><td>35.94 &mu;s</td><td>0.712 &mu;s</td><td>0.974 &mu;s</td><td>35.50 &mu;s</td><td>16.2964</td><td>33 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[3]</td><td>99.91 &mu;s</td><td>1.924 &mu;s</td><td>2.821 &mu;s</td><td>99.27 &mu;s</td><td>73.7305</td><td>151 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[3]</td><td>99.61 &mu;s</td><td>1.983 &mu;s</td><td>1.948 &mu;s</td><td>99.76 &mu;s</td><td>85.9375</td><td>173 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[3]</td><td>49.86 &mu;s</td><td>0.983 &mu;s</td><td>1.616 &mu;s</td><td>49.23 &mu;s</td><td>26.3672</td><td>54 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[3]</td><td>60.14 &mu;s</td><td>0.830 &mu;s</td><td>0.736 &mu;s</td><td>60.14 &mu;s</td><td>31.7993</td><td>64 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[6]</td><td>212.91 &mu;s</td><td>3.587 &mu;s</td><td>2.995 &mu;s</td><td>212.75 &mu;s</td><td>147.7051</td><td>302 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[6]</td><td>205.68 &mu;s</td><td>3.114 &mu;s</td><td>2.761 &mu;s</td><td>206.37 &mu;s</td><td>183.8379</td><td>370 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[6]</td><td>111.63 &mu;s</td><td>1.766 &mu;s</td><td>2.357 &mu;s</td><td>111.37 &mu;s</td><td>54.9316</td><td>112 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[6]</td><td>126.68 &mu;s</td><td>3.156 &mu;s</td><td>9.306 &mu;s</td><td>123.89 &mu;s</td><td>71.1670</td><td>144 KB</td>
+</tr><tr><td>SearcherMatrixSequential</td><td>String[9]</td><td>318.13 &mu;s</td><td>6.237 &mu;s</td><td>5.529 &mu;s</td><td>317.94 &mu;s</td><td>221.6797</td><td>453 KB</td>
+</tr><tr><td>SearcherMatrixParallel</td><td>String[9]</td><td>314.67 &mu;s</td><td>6.110 &mu;s</td><td>14.520 &mu;s</td><td>309.35 &mu;s</td><td>270.5078</td><td>545 KB</td>
+</tr><tr><td>SearcherFlyweightSequential</td><td>String[9]</td><td>163.31 &mu;s</td><td>3.255 &mu;s</td><td>5.256 &mu;s</td><td>162.73 &mu;s</td><td>81.2988</td><td>166 KB</td>
+</tr><tr><td>SeracherFlyweightParallel</td><td>String[9]</td><td>166.77 &mu;s</td><td>3.323 &mu;s</td><td>7.961 &mu;s</td><td>164.79 &mu;s</td><td>104.4922</td><td>211 KB</td>
+</tr></tbody></table>
+</body>
+</html>
