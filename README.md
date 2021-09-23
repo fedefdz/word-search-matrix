@@ -112,7 +112,8 @@ The mark `*` is added manually on the right side of the table to indicate which 
 > #### NOTE:
 > The full copy of results are `bench/BenchmarkDotNet.Artifacts` with a detailed iterations 
 > and in `./BenchmarkDotNet.Artifacts/results` a resume of each benchmarks.
-> 
+> Edit `.gitignore` to exclude it. 
+>
 > Execution results are saved in current directory in `BenchmarkDotNet.Artifacts` folder
 
 > #### Warning:
